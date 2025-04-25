@@ -8,8 +8,6 @@ import Meals from "../components/meals";
 import LargeButton from "../components/ui/buttons/large-button";
 import useMealsStore from "../stores/meals";
 
-const todaysDate = new Date().toISOString().split("T")[0];
-
 function MealsScreen({ navigation }) {
   const { selectedDate } = useMealsStore((state) => state);
 
