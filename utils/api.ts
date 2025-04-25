@@ -16,8 +16,6 @@ const ENDPOINTS = {
   FOODS: `${BASE_URL}/foods`,
 };
 
-console.log("BASE_URL:", BASE_URL);
-
 export const queryClient = new QueryClient();
 
 const handleResponse = async (res: Response) => {
@@ -43,7 +41,6 @@ export const api = {
       method: "GET",
       headers: REQUEST_HEADERS,
     });
-    console.log(`${ENDPOINTS.MEALS}?date=${date}`);
     const data = await handleResponse(res);
     return data.meals;
   },
