@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "lib": ["ES2015"],
     "typeRoots": ["./env.d.ts"]
   },
   "extends": "expo/tsconfig.base"
