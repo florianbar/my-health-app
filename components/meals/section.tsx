@@ -1,20 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
 
-import { TIMESLOT_LABLES } from "../../utils/meals";
 import { Meal } from "../../types/meals";
 import MealsItem from "./item";
 
-interface MealsTimeslotProps {
-  index: number;
+interface Props {
+  title?: string;
   meals: Meal[];
 }
 
-function MealsTimeslot({ index, meals }: MealsTimeslotProps) {
+function MealsSection({ title, meals }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {TIMESLOT_LABLES[Object.keys(TIMESLOT_LABLES)[index]]}
-      </Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.mealsContainer}>
         {meals.length > 0 &&
           meals.map((meal) => <MealsItem key={meal.id} meal={meal} />)}
@@ -25,7 +22,7 @@ function MealsTimeslot({ index, meals }: MealsTimeslotProps) {
   );
 }
 
-export default MealsTimeslot;
+export default MealsSection;
 
 const styles = StyleSheet.create({
   container: {
