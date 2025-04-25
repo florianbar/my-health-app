@@ -5,11 +5,12 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from "react";
-import { View, StyleSheet, Button, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import useMealsStore from "../../stores/meals";
 import { Meal, OrganizedMeals } from "../../types/meals";
 import { getMealsByDateAndTime } from "../../utils/meals";
+import MealsHeader from "./header";
 import MealsSections from "./sections";
 
 interface Props {
@@ -19,8 +20,7 @@ interface Props {
 const Meals = forwardRef(({ meals }: Props, ref) => {
   const listRef = useRef(null);
 
-  const { selectedDate, actions } = useMealsStore((state) => state);
-  const { prevDay, nextDay } = actions;
+  const { selectedDate } = useMealsStore((state) => state);
 
   const organizedMeals = useMemo<OrganizedMeals[]>(() => {
     if (meals && meals.length === 0) {
@@ -47,19 +47,9 @@ const Meals = forwardRef(({ meals }: Props, ref) => {
     }
   }, [listRef, organizedMeals]);
 
-  const isToday = useMemo(() => {
-    const today = new Date().toISOString().split("T")[0];
-    return selectedDate === today;
-  }, [selectedDate]);
-
   return (
     <View style={styles.container}>
-      <View style={styles.dateButtonsContainer}>
-        <Button title="Prev" onPress={prevDay} />
-        <Text style={styles.title}>{selectedDate}</Text>
-        {!isToday && <Button title="Next" onPress={nextDay} />}
-      </View>
-
+      <MealsHeader />
       <MealsSections
         key={selectedDate}
         meals={organizedMeals[0]?.meals || []}
@@ -73,14 +63,5 @@ export default Meals;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  dateButtonsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
   },
 });
