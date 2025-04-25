@@ -9,6 +9,10 @@ export const TIMESLOT_LABLES = {
 };
 
 export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
+  if (!meals) {
+    return [];
+  }
+
   const organizedMeals = [];
   const timeSlots = {
     [TIMESLOT_LABLES.breakfast]: 6,
