@@ -41,7 +41,6 @@ function AddMealsScreen({ navigation }) {
     isPending: foodsIsPending,
     isError: foodsHasError,
     error: foodsError,
-    refetch,
   } = useQuery({
     queryKey: ["foods"],
     queryFn: () => api.fetchFoods(),
