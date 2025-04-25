@@ -1,18 +1,5 @@
 import { Meal, OrganizedMeals } from "../types/meals";
 
-// export function getMappedMeals(meals: Meal[]): Meal[] {
-//   return meals.map((meal: Meal) => {
-//     const { id, quantity, consumed_at, food } = meal;
-
-//     return {
-//       id,
-//       quantity,
-//       consumedAt: consumed_at,
-//       food,
-//     };
-//   });
-// }
-
 export const TIMESLOT_LABLES = {
   breakfast: "Breakfast",
   morningSnack: "Morning Snack",
@@ -72,7 +59,7 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
 
   for (const date in mealsByDate) {
     organizedMeals.push({
-      date: date,
+      date,
       meals: Object.values(mealsByDate[date]),
     });
   }
