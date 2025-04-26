@@ -12,13 +12,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { v4 as uuidv4 } from "uuid";
 import { useQuery, useMutation } from "@tanstack/react-query";
 
-import { COLORS } from "../../constants/colors";
-import { api, queryClient } from "../../utils/api";
-import { getTodayISOString } from "../../utils/date";
-import { Meal } from "../../types/meals";
-import Picker from "../../components/ui/picker";
-import Input from "../../components/ui/form/input";
-import Button from "../../components/ui/buttons/button";
+import { COLORS } from "../constants/colors";
+import { api, queryClient } from "../utils/api";
+import { getTodayISOString } from "../utils/date";
+import { Meal } from "../types/meals";
+import Picker from "../components/ui/picker";
+import Input from "../components/ui/form/input";
+import Button from "../components/ui/buttons/button";
 
 function getInitialMeal(): Meal {
   return {
