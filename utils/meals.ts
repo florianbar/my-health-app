@@ -1,12 +1,5 @@
 import { Meal, OrganizedMeals } from "../types/meals";
-
-export const TIMESLOT_LABLES = {
-  breakfast: "Breakfast",
-  morningSnack: "Morning Snack",
-  lunch: "Lunch",
-  afternoonSnack: "Afternoon Snack",
-  dinner: "Dinner",
-};
+import { TIMESLOTS, TIMESLOT_LABELS } from "../constants/timeslots";
 
 export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
   if (!meals) {
@@ -14,15 +7,6 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
   }
 
   const organizedMeals = [];
-  const timeSlots = {
-    [TIMESLOT_LABLES.breakfast]: 6,
-    [TIMESLOT_LABLES.morningSnack]: 9,
-    [TIMESLOT_LABLES.lunch]: 12,
-    [TIMESLOT_LABLES.afternoonSnack]: 15,
-    [TIMESLOT_LABLES.dinner]: 18,
-  };
-  const timeslotKeys = Object.values(TIMESLOT_LABLES);
-
   const mealsByDate = {};
 
   meals.forEach((meal: Meal) => {
@@ -33,8 +17,8 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
     let closestSlot = null;
     let minDifference = Infinity;
 
-    for (const slotName of timeslotKeys) {
-      const slotHour = timeSlots[slotName];
+    for (const slotName of TIMESLOT_LABELS) {
+      const slotHour = TIMESLOTS[slotName];
       const difference = Math.abs(hour - slotHour);
 
       if (difference < minDifference) {
@@ -42,7 +26,7 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
         closestSlot = slotName;
       } else if (difference === minDifference) {
         // If the difference is the same, round to the later time slot
-        if (Math.abs(hour - timeSlots[closestSlot]) < difference) {
+        if (Math.abs(hour - TIMESLOTS[closestSlot]) < difference) {
           closestSlot = slotName;
         }
       }
@@ -50,11 +34,11 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
 
     if (!mealsByDate[dateString]) {
       mealsByDate[dateString] = {
-        [timeslotKeys[0]]: [],
-        [timeslotKeys[1]]: [],
-        [timeslotKeys[2]]: [],
-        [timeslotKeys[3]]: [],
-        [timeslotKeys[4]]: [],
+        [TIMESLOT_LABELS[0]]: [],
+        [TIMESLOT_LABELS[1]]: [],
+        [TIMESLOT_LABELS[2]]: [],
+        [TIMESLOT_LABELS[3]]: [],
+        [TIMESLOT_LABELS[4]]: [],
       };
     }
 
