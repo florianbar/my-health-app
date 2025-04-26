@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { api } from "../utils/api";
 import Meals from "../components/meals";
-import LargeButton from "../components/ui/buttons/large-button";
+import IconButton from "../components/ui/buttons/icon-button";
 import useMealsStore from "../stores/meals";
 
 function MealsScreen({ navigation }) {
@@ -30,11 +30,11 @@ function MealsScreen({ navigation }) {
       {!isPending && <Meals meals={data} />}
 
       <View style={styles.buttonContainer}>
-        <LargeButton
+        <IconButton
           onPress={() => navigation.navigate("add-meal", { name: "" })}
         >
           <Ionicons name="add" size={36} color="white" />
-        </LargeButton>
+        </IconButton>
       </View>
     </View>
   );

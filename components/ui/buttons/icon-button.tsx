@@ -2,13 +2,13 @@ import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
 
 import { COLORS } from "../../../constants/colors";
 
-interface LargeButtonProps {
+interface Props {
   children: string | JSX.Element;
   onPress: () => void;
   disabled?: boolean;
 }
 
-function LargeButton({ children, onPress, disabled }: LargeButtonProps) {
+function IconButton({ children, onPress, disabled }: Props) {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -27,7 +27,7 @@ function LargeButton({ children, onPress, disabled }: LargeButtonProps) {
   );
 }
 
-export default LargeButton;
+export default IconButton;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {
