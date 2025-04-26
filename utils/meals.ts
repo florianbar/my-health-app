@@ -18,7 +18,7 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
     let minDifference = Infinity;
 
     for (const slotName of TIMESLOT_LABELS) {
-      const slotHour = TIMESLOTS[slotName];
+      const slotHour = TIMESLOTS[slotName].split(":")[0];
       const difference = Math.abs(hour - slotHour);
 
       if (difference < minDifference) {
@@ -26,7 +26,9 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
         closestSlot = slotName;
       } else if (difference === minDifference) {
         // If the difference is the same, round to the later time slot
-        if (Math.abs(hour - TIMESLOTS[closestSlot]) < difference) {
+        if (
+          Math.abs(hour - TIMESLOTS[closestSlot].split(":")[0]) < difference
+        ) {
           closestSlot = slotName;
         }
       }

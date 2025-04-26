@@ -1,9 +1,9 @@
 export const TIMESLOTS = {
-  Breakfast: 6,
-  "Morning Snack": 9,
-  Lunch: 12,
-  "Afternoon Snack": 15,
-  Dinner: 18,
+  Breakfast: "06:00:00",
+  "Morning Snack": "09:00:00",
+  Lunch: "12:00:00",
+  "Afternoon Snack": "15:00:00",
+  Dinner: "18:00:00",
 };
 
 export const TIMESLOT_LABELS = Object.keys(TIMESLOTS);
