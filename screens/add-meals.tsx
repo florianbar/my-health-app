@@ -12,7 +12,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { v4 as uuidv4 } from "uuid";
 import { useQuery, useMutation } from "@tanstack/react-query";
 
-import { COLORS } from "../constants/colors";
 import { api, queryClient } from "../utils/api";
 import { getTodayISOString } from "../utils/date";
 import { Meal } from "../types/meals";
@@ -20,6 +19,7 @@ import Picker from "../components/ui/picker";
 import Input from "../components/ui/form/input";
 import Button from "../components/ui/buttons/button";
 import TextButton from "../components/ui/buttons/text-button";
+import useMealsStore from "../stores/meals";
 
 function getInitialMeal(): Meal {
   return {
@@ -36,6 +36,8 @@ function getInitialMeal(): Meal {
 
 function AddMealsScreen({ navigation }) {
   const [meals, setMeals] = useState<Meal[]>([getInitialMeal()]);
+
+  const { selectedDate, selectedTime } = useMealsStore((state) => state);
 
   const {
     data: foods,
@@ -111,9 +113,11 @@ function AddMealsScreen({ navigation }) {
       return;
     }
 
+    const consumedAt = `${selectedDate}T${selectedTime}`;
     const mappedMeals = meals.map((meal: Meal) => ({
       food_id: meal.food.id,
       quantity: meal.quantity,
+      consumed_at: consumedAt,
     }));
 
     addMeals(mappedMeals);

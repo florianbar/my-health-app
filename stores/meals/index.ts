@@ -2,8 +2,11 @@ import { create } from "zustand";
 
 import { MealStoreState } from "./types";
 
+const today = new Date().toISOString().split("T");
+
 const initialState = {
-  selectedDate: new Date().toISOString().split("T")[0],
+  selectedDate: today[0],
+  selectedTime: today[1],
 };
 
 const useMealsStore = create<MealStoreState>((set, get) => ({
@@ -24,6 +27,10 @@ const useMealsStore = create<MealStoreState>((set, get) => ({
       const dateString = date.toISOString().split("T")[0];
 
       set({ selectedDate: dateString });
+    },
+
+    selectTime: (time: string) => {
+      set({ selectedTime: time });
     },
   },
 }));

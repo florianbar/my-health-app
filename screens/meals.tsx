@@ -9,13 +9,20 @@ import IconButton from "../components/ui/buttons/icon-button";
 import useMealsStore from "../stores/meals";
 
 function MealsScreen({ navigation }) {
-  const { selectedDate } = useMealsStore((state) => state);
+  const { selectedDate, actions } = useMealsStore((state) => state);
+  const { selectTime } = actions;
 
   const { data, isPending, isError, error, refetch } = useQuery({
     queryKey: ["meals", selectedDate],
     queryFn: () => api.fetchMeals(selectedDate),
     staleTime: Infinity,
   });
+
+  function handleAddMeal() {
+    const time = new Date().toISOString().split("T")[1];
+    selectTime(time);
+    navigation.navigate("add-meal", { name: "" });
+  }
 
   useEffect(() => {
     if (selectedDate) {
@@ -30,9 +37,7 @@ function MealsScreen({ navigation }) {
       {!isPending && <Meals meals={data} />}
 
       <View style={styles.buttonContainer}>
-        <IconButton
-          onPress={() => navigation.navigate("add-meal", { name: "" })}
-        >
+        <IconButton onPress={handleAddMeal}>
           <Ionicons name="add" size={36} color="white" />
         </IconButton>
       </View>
