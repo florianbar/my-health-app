@@ -186,7 +186,7 @@ function AddMealsScreen({ navigation }) {
       ))}
 
       <TextButton iconName="add-outline" onPress={addMeal}>
-        Add Meal Item
+        Add meal
       </TextButton>
     </ScrollView>
   );

@@ -4,16 +4,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../../constants/colors";
 
 interface Props {
-  children: string | JSX.Element;
-  onPress: () => void;
+  children?: string | JSX.Element;
   iconName?: keyof typeof Ionicons.glyphMap;
+  onPress: () => void;
+  size?: "sm" | "md" | "lg";
 }
 
 function TextButton({ children, onPress, iconName }: Props) {
   return (
     <Pressable onPress={onPress} style={styles.container}>
-      {iconName && <Ionicons name={iconName} size={18} style={styles.icon} />}
-      <Text style={styles.text}>{children}</Text>
+      {iconName && <Ionicons name={iconName} size={20} style={styles.icon} />}
+      {children && <Text style={styles.text}>{children}</Text>}
     </Pressable>
   );
 }
@@ -25,9 +26,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 4,
-    marginVertical: 12,
-    paddingVertical: 6,
+    gap: 2,
+    paddingVertical: 2,
   },
   icon: {
     color: COLORS.blue,
