@@ -19,6 +19,7 @@ import { Meal } from "../types/meals";
 import Picker from "../components/ui/picker";
 import Input from "../components/ui/form/input";
 import Button from "../components/ui/buttons/button";
+import TextButton from "../components/ui/buttons/text-button";
 
 function getInitialMeal(): Meal {
   return {
@@ -184,10 +185,9 @@ function AddMealsScreen({ navigation }) {
         </View>
       ))}
 
-      <Pressable onPress={addMeal} style={styles.addButtonContainer}>
-        <Ionicons name="add-outline" size={18} style={styles.addButtonIcon} />
-        <Text style={styles.addButtonText}>Add Meal Item</Text>
-      </Pressable>
+      <TextButton iconName="add-outline" onPress={addMeal}>
+        Add Meal Item
+      </TextButton>
     </ScrollView>
   );
 }
@@ -216,23 +216,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "flex-end",
-  },
-  addButtonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 4,
-    marginVertical: 12,
-    paddingVertical: 6,
-  },
-  addButtonIcon: {
-    color: COLORS.blue,
-  },
-  addButtonText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: COLORS.blue,
   },
   noItemsContainer: {
     flex: 1,
