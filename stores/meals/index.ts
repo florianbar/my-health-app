@@ -29,7 +29,12 @@ const useMealsStore = create<MealStoreState>((set, get) => ({
       set({ selectedDate: dateString });
     },
 
-    selectTime: (time: string) => {
+    setTime: (time: string) => {
+      set({ selectedTime: time });
+    },
+
+    setTimeToNow: () => {
+      const time = new Date().toISOString().split("T")[1];
       set({ selectedTime: time });
     },
   },

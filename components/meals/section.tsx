@@ -15,10 +15,10 @@ interface Props {
 function MealsSection({ title, meals }: Props) {
   const navigation = useNavigation();
 
-  const { selectTime } = useMealsStore((state) => state.actions);
+  const { setTime } = useMealsStore((state) => state.actions);
 
   function handleAdd() {
-    selectTime(TIMESLOTS[title]);
+    setTime(TIMESLOTS[title]);
     navigation.navigate("add-meal", { name: "" });
   }
 

@@ -10,7 +10,7 @@ import useMealsStore from "../stores/meals";
 
 function MealsScreen({ navigation }) {
   const { selectedDate, actions } = useMealsStore((state) => state);
-  const { selectTime } = actions;
+  const { setTimeToNow } = actions;
 
   const { data, isPending, isError, error, refetch } = useQuery({
     queryKey: ["meals", selectedDate],
@@ -19,8 +19,7 @@ function MealsScreen({ navigation }) {
   });
 
   function handleAddMeal() {
-    const time = new Date().toISOString().split("T")[1];
-    selectTime(time);
+    setTimeToNow();
     navigation.navigate("add-meal", { name: "" });
   }
 

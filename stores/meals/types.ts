@@ -7,7 +7,8 @@ interface MealStoreActions {
   actions: {
     prevDay: () => void;
     nextDay: () => void;
-    selectTime: (time: string) => void;
+    setTime: (time: string) => void;
+    setTimeToNow: () => void;
   };
 }
 
