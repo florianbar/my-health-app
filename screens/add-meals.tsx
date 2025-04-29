@@ -24,7 +24,7 @@ import useMealsStore from "../stores/meals";
 function getInitialMeal(): Meal {
   return {
     id: uuidv4(),
-    quantity: "1",
+    quantity: 1,
     consumed_at: "",
     food: {
       id: "",
@@ -98,7 +98,7 @@ function AddMealsScreen({ navigation }) {
         }
 
         // Validate quantity
-        if (meal.quantity === "" || parseInt(meal.quantity) <= 0) {
+        if (meal.quantity || meal.quantity <= 0) {
           throw new Error("The amount must be greater than 0.");
         }
 

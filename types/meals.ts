@@ -1,6 +1,6 @@
 export type Meal = {
   id: string;
-  quantity: string;
+  quantity: number;
   consumed_at: string;
   food: {
     id: string;

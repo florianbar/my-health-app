@@ -50,7 +50,7 @@ function MealsItem({ meal }: { meal: Meal }) {
 
       <Text style={styles.text}>
         {meal.food.name}
-        {parseInt(meal.quantity) > 1 && <Text> x {meal.quantity}</Text>}
+        {meal.quantity > 1 && <Text> x {meal.quantity}</Text>}
       </Text>
     </Pressable>
   );
