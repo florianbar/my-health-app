@@ -12,25 +12,24 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
   meals.forEach((meal: Meal) => {
     const consumedAt = new Date(meal.consumed_at);
     const dateString = consumedAt.toISOString().split("T")[0];
-    const hour = consumedAt.getHours();
+    const time = consumedAt.toISOString().split("T")[1];
+    const hour = parseInt(time.split(":")[0], 10);
 
-    let closestSlot = null;
-    let minDifference = Infinity;
+    let closestSlot = TIMESLOT_LABELS[0]; // Default to the first slot (e.g., breakfast)
 
-    for (const slotName of TIMESLOT_LABELS) {
-      const slotHour = TIMESLOTS[slotName].split(":")[0];
-      const difference = Math.abs(hour - slotHour);
+    for (let i = 0; i < TIMESLOT_LABELS.length; i++) {
+      const slotName = TIMESLOT_LABELS[i];
+      const slotHour = parseInt(TIMESLOTS[slotName].split(":")[0], 10);
 
-      if (difference < minDifference) {
-        minDifference = difference;
+      if (hour < slotHour) {
+        // Assign to the previous slot if the current hour is less than the slot hour
+        closestSlot = TIMESLOT_LABELS[Math.max(0, i - 1)];
+        break;
+      }
+
+      // If it's the last slot, assign it to the last slot
+      if (i === TIMESLOT_LABELS.length - 1) {
         closestSlot = slotName;
-      } else if (difference === minDifference) {
-        // If the difference is the same, round to the later time slot
-        if (
-          Math.abs(hour - TIMESLOTS[closestSlot].split(":")[0]) < difference
-        ) {
-          closestSlot = slotName;
-        }
       }
     }
 
