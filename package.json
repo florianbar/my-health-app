@@ -8,7 +8,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "clear-start": "expo start -c",
-    "test": "jest"
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run test"
   },
   "dependencies": {
     "@react-navigation/native": "^7.1.5",
