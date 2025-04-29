@@ -7,6 +7,7 @@ describe("getMealsByDateAndTime", () => {
       id: "1",
       quantity: 1,
       consumed_at: "2025-04-29T04:00:00.000Z",
+      created_at: "2025-04-29T04:00:00.000Z",
       food: {
         id: "5",
         name: "Apple",
@@ -17,6 +18,7 @@ describe("getMealsByDateAndTime", () => {
       id: "2",
       quantity: 1,
       consumed_at: "2025-04-29T07:00:00.000Z",
+      created_at: "2025-04-29T07:00:00.000Z",
       food: {
         id: "8",
         name: "Banana",
@@ -27,6 +29,7 @@ describe("getMealsByDateAndTime", () => {
       id: "3",
       quantity: 1,
       consumed_at: "2025-04-29T10:00:00.000Z",
+      created_at: "2025-04-29T10:00:00.000Z",
       food: {
         id: "6",
         name: "Egg",
@@ -37,6 +40,7 @@ describe("getMealsByDateAndTime", () => {
       id: "4",
       quantity: 1,
       consumed_at: "2025-04-29T13:00:00.000Z",
+      created_at: "2025-04-29T13:00:00.000Z",
       food: {
         id: "15",
         name: "Blueberry",
@@ -47,6 +51,7 @@ describe("getMealsByDateAndTime", () => {
       id: "5",
       quantity: 1,
       consumed_at: "2025-04-29T16:00:00.000Z",
+      created_at: "2025-04-29T16:00:00.000Z",
       food: {
         id: "15",
         name: "Blueberry",
@@ -57,6 +62,7 @@ describe("getMealsByDateAndTime", () => {
       id: "6",
       quantity: 1,
       consumed_at: "2025-04-30T04:30:00.000Z",
+      created_at: "2025-04-30T04:30:00.000Z",
       food: {
         id: "10",
         name: "Oats",
@@ -67,6 +73,7 @@ describe("getMealsByDateAndTime", () => {
       id: "7",
       quantity: 1,
       consumed_at: "2025-04-30T19:00:00.000Z",
+      created_at: "2025-04-30T19:00:00.000Z",
       food: {
         id: "22",
         name: "Salmon",
@@ -147,6 +154,35 @@ describe("getMealsByDateAndTime", () => {
           [],
         ],
       },
+    ]);
+  });
+
+  it("should sort meals within the same timeslot by created_at timestamp", () => {
+    const mealsWithDifferentCreatedAt: Meal[] = [
+      {
+        ...mockMeals[0],
+        consumed_at: "2025-05-02T06:00:00.000Z",
+        created_at: "2025-05-02T06:30:00.000Z", // Created last
+      },
+      {
+        ...mockMeals[0],
+        consumed_at: "2025-05-02T06:15:00.000Z",
+        created_at: "2025-05-02T06:00:00.000Z", // Created first
+      },
+      {
+        ...mockMeals[0],
+        consumed_at: "2025-05-02T06:10:00.000Z",
+        created_at: "2025-05-02T06:15:00.000Z", // Created second
+      },
+    ];
+
+    const organizedMeals = getMealsByDateAndTime(mealsWithDifferentCreatedAt);
+
+    // All meals should be in the first timeslot (Breakfast)
+    expect(organizedMeals[0].meals[0]).toEqual([
+      mealsWithDifferentCreatedAt[1], // Early Entry
+      mealsWithDifferentCreatedAt[2], // Middle Entry
+      mealsWithDifferentCreatedAt[0], // Late Entry
     ]);
   });
 });
