@@ -4,71 +4,71 @@ import { Meal } from "../../types/meals";
 describe("getMealsByDateAndTime", () => {
   const mockMeals: Meal[] = [
     {
-      id: 396,
+      id: "1",
       quantity: 1,
       consumed_at: "2025-04-29T04:00:00.000Z",
       food: {
-        id: 5,
+        id: "5",
         name: "Apple",
         healthy: true,
       },
     },
     {
-      id: 397,
+      id: "2",
       quantity: 1,
       consumed_at: "2025-04-29T07:00:00.000Z",
       food: {
-        id: 8,
+        id: "8",
         name: "Banana",
         healthy: true,
       },
     },
     {
-      id: 398,
+      id: "3",
       quantity: 1,
       consumed_at: "2025-04-29T10:00:00.000Z",
       food: {
-        id: 6,
+        id: "6",
         name: "Egg",
         healthy: true,
       },
     },
     {
-      id: 399,
+      id: "4",
       quantity: 1,
       consumed_at: "2025-04-29T13:00:00.000Z",
       food: {
-        id: 15,
+        id: "15",
         name: "Blueberry",
         healthy: true,
       },
     },
     {
-      id: 400,
+      id: "5",
       quantity: 1,
       consumed_at: "2025-04-29T16:00:00.000Z",
       food: {
-        id: 15,
+        id: "15",
         name: "Blueberry",
         healthy: true,
       },
     },
     {
-      id: 401,
+      id: "6",
       quantity: 1,
       consumed_at: "2025-04-30T04:30:00.000Z",
       food: {
-        id: 10,
+        id: "10",
         name: "Oats",
         healthy: true,
       },
     },
     {
-      id: 402,
+      id: "7",
       quantity: 1,
       consumed_at: "2025-04-30T19:00:00.000Z",
       food: {
-        id: 22,
+        id: "22",
         name: "Salmon",
         healthy: true,
       },
