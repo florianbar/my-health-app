@@ -98,7 +98,7 @@ function AddMealsScreen({ navigation }) {
         }
 
         // Validate quantity
-        if (meal.quantity || meal.quantity <= 0) {
+        if (meal.quantity <= 0) {
           throw new Error("The amount must be greater than 0.");
         }
 
@@ -174,7 +174,7 @@ function AddMealsScreen({ navigation }) {
             </View>
             <Input
               containerStyle={styles.quantityInput}
-              value={meal.quantity}
+              value={meal.quantity.toString()}
               onChangeText={(value: string) =>
                 updateMeal(mealIndex, "quantity", value)
               }
