@@ -46,7 +46,7 @@ export const api = {
   },
 
   addMeals: async (
-    meals: { food_id: string; quantity: string }[]
+    meals: { food_id: string; quantity: string; consumed_at: string }[]
   ): Promise<Meal[]> => {
     const res = await fetch(ENDPOINTS.MEALS, {
       method: "POST",
