@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 
 import { api } from "../utils/api";
 import Meals from "../components/meals";
 import IconButton from "../components/ui/buttons/icon-button";
+import LoadingSpinner from "../components/ui/loading-spinner";
 import useMealsStore from "../stores/meals";
 
 function MealsScreen({ navigation }) {
@@ -31,7 +32,7 @@ function MealsScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {isPending && <Text>Loading...</Text>}
+      {isPending && <LoadingSpinner />}
 
       {!isPending && <Meals meals={data} />}
 

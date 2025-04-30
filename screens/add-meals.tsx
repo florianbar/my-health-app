@@ -20,6 +20,7 @@ import Input from "../components/ui/form/input";
 import Button from "../components/ui/buttons/button";
 import TextButton from "../components/ui/buttons/text-button";
 import useMealsStore from "../stores/meals";
+import LoadingSpinner from "../components/ui/loading-spinner";
 
 function getInitialMeal(): Meal {
   return {
@@ -137,62 +138,68 @@ function AddMealsScreen({ navigation }) {
   }
 
   if (foodsIsPending) {
-    return <Text>Loading...</Text>;
+    return (
+      <View style={styles.container}>
+        <LoadingSpinner />
+      </View>
+    );
   }
 
   return (
     <ScrollView style={styles.container}>
-      {meals.map((meal: Meal, mealIndex: number) => (
-        <View key={meal.id}>
-          <View style={styles.textInputsContainer}>
-            <View style={styles.foodPickerContainer}>
-              <Picker
-                options={foods.map((food) => ({
-                  label: food.name,
-                  value: food.id,
-                }))}
-                onChange={(value: string) => {
-                  const { id, name, healthy } = foods.find(
-                    (food) => food.id === value
-                  );
-                  updateMeal(mealIndex, "food", { id, name, healthy });
-                }}
-                renderNoItemsFound={(searchQuery) => (
-                  <View style={styles.noItemsContainer}>
-                    <Text style={styles.noItemsTitle}>Not Found</Text>
-                    <Text style={styles.noItemsText}>
-                      Sorry, there is no food item matching:
-                    </Text>
-                    <Text style={styles.noItemsText}>"{searchQuery}"</Text>
-                    <View style={styles.addFoodButtonContainer}>
-                      <Button size="sm" onPress={() => {}}>
-                        Add Food
-                      </Button>
+      <View style={styles.innerContainer}>
+        {meals.map((meal: Meal, mealIndex: number) => (
+          <View key={meal.id}>
+            <View style={styles.textInputsContainer}>
+              <View style={styles.foodPickerContainer}>
+                <Picker
+                  options={foods.map((food) => ({
+                    label: food.name,
+                    value: food.id,
+                  }))}
+                  onChange={(value: string) => {
+                    const { id, name, healthy } = foods.find(
+                      (food) => food.id === value
+                    );
+                    updateMeal(mealIndex, "food", { id, name, healthy });
+                  }}
+                  renderNoItemsFound={(searchQuery) => (
+                    <View style={styles.noItemsContainer}>
+                      <Text style={styles.noItemsTitle}>Not Found</Text>
+                      <Text style={styles.noItemsText}>
+                        Sorry, there is no food item matching:
+                      </Text>
+                      <Text style={styles.noItemsText}>"{searchQuery}"</Text>
+                      <View style={styles.addFoodButtonContainer}>
+                        <Button size="sm" onPress={() => {}}>
+                          Add Food
+                        </Button>
+                      </View>
                     </View>
-                  </View>
-                )}
+                  )}
+                />
+              </View>
+              <Input
+                containerStyle={styles.quantityInput}
+                value={meal.quantity.toString()}
+                onChangeText={(value: string) =>
+                  updateMeal(mealIndex, "quantity", value)
+                }
+                keyboardType="numeric"
               />
+              {meals.length > 1 && (
+                <Pressable onPress={() => removeMeal(mealIndex)}>
+                  <Ionicons name="trash-outline" size={24} />
+                </Pressable>
+              )}
             </View>
-            <Input
-              containerStyle={styles.quantityInput}
-              value={meal.quantity.toString()}
-              onChangeText={(value: string) =>
-                updateMeal(mealIndex, "quantity", value)
-              }
-              keyboardType="numeric"
-            />
-            {meals.length > 1 && (
-              <Pressable onPress={() => removeMeal(mealIndex)}>
-                <Ionicons name="trash-outline" size={24} />
-              </Pressable>
-            )}
           </View>
-        </View>
-      ))}
+        ))}
 
-      <TextButton iconName="add-outline" onPress={addMeal}>
-        Add meal
-      </TextButton>
+        <TextButton iconName="add-outline" onPress={addMeal}>
+          Add meal
+        </TextButton>
+      </View>
     </ScrollView>
   );
 }
@@ -201,9 +208,11 @@ export default AddMealsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 8,
-    paddingHorizontal: 16,
+    flex: 1,
     backgroundColor: "#fff",
+  },
+  innerContainer: {
+    padding: 16,
   },
   textInputsContainer: {
     flexDirection: "row",
