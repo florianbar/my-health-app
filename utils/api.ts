@@ -73,4 +73,14 @@ export const api = {
     const data = await handleResponse(res);
     return data.foods;
   },
+
+  addFood: async (food: { name: string; healthy: boolean }): Promise<Food> => {
+    const res = await fetch(ENDPOINTS.FOODS, {
+      method: "POST",
+      headers: REQUEST_HEADERS,
+      body: JSON.stringify(food),
+    });
+    const data = await handleResponse(res);
+    return data.food;
+  },
 };
