@@ -29,6 +29,10 @@ const useMealsStore = create<MealStoreState>((set, get) => ({
       set({ selectedDate: dateString });
     },
 
+    setDate: (date: string) => {
+      set({ selectedDate: date });
+    },
+
     setTime: (time: string) => {
       set({ selectedTime: time });
     },
