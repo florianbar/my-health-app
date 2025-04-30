@@ -66,7 +66,7 @@ function AddMealsScreen({ navigation }: Props) {
     mutationFn: api.addMeals,
     onSuccess: () => {
       // Invalidate the meals query to refetch the data
-      queryClient.invalidateQueries({ queryKey: ["meals"] });
+      queryClient.invalidateQueries({ queryKey: ["meals", selectedDate] });
 
       // Reset the meals
       setMeals([getInitialMeal()]);
