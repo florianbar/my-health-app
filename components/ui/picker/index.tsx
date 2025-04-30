@@ -23,7 +23,10 @@ type Option = {
 interface PickerProps {
   options: Option[];
   onChange: (value: OptionValue) => void;
-  renderNoItemsFound?: (searchQuery: string) => JSX.Element;
+  renderNoItemsFound?: (
+    searchQuery: string,
+    closeModal: () => void
+  ) => JSX.Element;
 }
 
 function Picker({ options, onChange, renderNoItemsFound }: PickerProps) {
@@ -125,7 +128,7 @@ function Picker({ options, onChange, renderNoItemsFound }: PickerProps) {
 
               {filteredOptions?.length === 0 && renderNoItemsFound && (
                 <View style={styles.noItemsContainer}>
-                  {renderNoItemsFound(searchQuery)}
+                  {renderNoItemsFound(searchQuery, closeModal)}
                 </View>
               )}
             </View>
