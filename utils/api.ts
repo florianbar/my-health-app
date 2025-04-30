@@ -1,4 +1,5 @@
 import { API_URL } from "@env";
+import { Platform } from "react-native";
 import { QueryClient } from "@tanstack/react-query";
 
 import { Meal } from "../types/meals";
@@ -9,7 +10,15 @@ const REQUEST_HEADERS = {
   "X-API-KEY": process.env.API_KEY,
 };
 
-const BASE_URL = `${API_URL}/api`;
+const getApiUrl = () => {
+  if (Platform.OS === "android") {
+    // Replace localhost or 127.0.0.1 with 10.0.2.2
+    return API_URL.replace(/localhost|127\.0\.0\.1/, "10.0.2.2");
+  }
+  return API_URL;
+};
+
+const BASE_URL = `${getApiUrl()}/api`;
 
 const ENDPOINTS = {
   MEALS: `${BASE_URL}/meals`,
