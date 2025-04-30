@@ -32,7 +32,6 @@ function getInitialMeal(): Meal {
     id: uuidv4(),
     quantity: 1,
     consumed_at: "",
-    created_at: "",
     food: {
       id: "",
       name: "",
