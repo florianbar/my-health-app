@@ -7,6 +7,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 
 import MealsScreen from "./screens/meals";
 import AddMealsScreen from "./screens/add-meals";
+import AddFoodScreen from "./screens/add-food";
 import { queryClient } from "./utils/api";
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,13 @@ export default function App() {
               component={AddMealsScreen}
               options={{
                 title: "Add Meal",
+              }}
+            />
+            <Stack.Screen
+              name="add-food"
+              component={AddFoodScreen}
+              options={{
+                title: "Add Food",
               }}
             />
           </Stack.Navigator>

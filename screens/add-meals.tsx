@@ -8,6 +8,7 @@ import {
   ScrollView,
   Button as RNButton,
 } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import { v4 as uuidv4 } from "uuid";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -21,6 +22,10 @@ import Button from "../components/ui/buttons/button";
 import TextButton from "../components/ui/buttons/text-button";
 import useMealsStore from "../stores/meals";
 import LoadingSpinner from "../components/ui/loading-spinner";
+
+interface Props {
+  navigation: NativeStackNavigationProp<any>;
+}
 
 function getInitialMeal(): Meal {
   return {
@@ -36,7 +41,7 @@ function getInitialMeal(): Meal {
   };
 }
 
-function AddMealsScreen({ navigation }) {
+function AddMealsScreen({ navigation }: Props) {
   const [meals, setMeals] = useState<Meal[]>([getInitialMeal()]);
 
   const { selectedDate, selectedTime } = useMealsStore((state) => state);
@@ -125,6 +130,10 @@ function AddMealsScreen({ navigation }) {
     addMeals(mappedMeals);
   }
 
+  function handleAddFood(name: string) {
+    navigation.navigate("add-food", { name });
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -163,7 +172,7 @@ function AddMealsScreen({ navigation }) {
                     );
                     updateMeal(mealIndex, "food", { id, name, healthy });
                   }}
-                  renderNoItemsFound={(searchQuery) => (
+                  renderNoItemsFound={(searchQuery, closeModal) => (
                     <View style={styles.noItemsContainer}>
                       <Text style={styles.noItemsTitle}>Not Found</Text>
                       <Text style={styles.noItemsText}>
@@ -171,7 +180,13 @@ function AddMealsScreen({ navigation }) {
                       </Text>
                       <Text style={styles.noItemsText}>"{searchQuery}"</Text>
                       <View style={styles.addFoodButtonContainer}>
-                        <Button size="sm" onPress={() => {}}>
+                        <Button
+                          size="sm"
+                          onPress={() => {
+                            closeModal();
+                            handleAddFood(searchQuery);
+                          }}
+                        >
                           Add Food
                         </Button>
                       </View>

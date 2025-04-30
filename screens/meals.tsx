@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 
@@ -9,7 +10,11 @@ import IconButton from "../components/ui/buttons/icon-button";
 import LoadingSpinner from "../components/ui/loading-spinner";
 import useMealsStore from "../stores/meals";
 
-function MealsScreen({ navigation }) {
+interface Props {
+  navigation: NativeStackNavigationProp<any>;
+}
+
+function MealsScreen({ navigation }: Props) {
   const { selectedDate, actions } = useMealsStore((state) => state);
   const { setTimeToNow } = actions;
 
