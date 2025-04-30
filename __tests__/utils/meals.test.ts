@@ -157,22 +157,22 @@ describe("getMealsByDateAndTime", () => {
     ]);
   });
 
-  it("should sort meals within the same timeslot by created_at timestamp", () => {
+  it("should sort meals within the same timeslot by id field", () => {
     const mealsWithDifferentCreatedAt: Meal[] = [
       {
         ...mockMeals[0],
+        id: "3", // Created last
         consumed_at: "2025-05-02T06:00:00.000Z",
-        created_at: "2025-05-02T06:30:00.000Z", // Created last
       },
       {
         ...mockMeals[0],
+        id: "1", // Created first
         consumed_at: "2025-05-02T06:15:00.000Z",
-        created_at: "2025-05-02T06:00:00.000Z", // Created first
       },
       {
         ...mockMeals[0],
+        id: "2", // Created second
         consumed_at: "2025-05-02T06:10:00.000Z",
-        created_at: "2025-05-02T06:15:00.000Z", // Created second
       },
     ];
 

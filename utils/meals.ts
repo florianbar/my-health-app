@@ -49,10 +49,9 @@ export function getMealsByDateAndTime(meals: Meal[]): OrganizedMeals[] {
   for (const date in mealsByDate) {
     for (const slot in mealsByDate[date]) {
       mealsByDate[date][slot].sort((mealA: Meal, mealB: Meal) => {
-        return (
-          new Date(mealA.created_at).getTime() -
-          new Date(mealB.created_at).getTime()
-        );
+        const idA = String(mealA?.id || "");
+        const idB = String(mealB?.id || "");
+        return idA.localeCompare(idB);
       });
     }
   }
