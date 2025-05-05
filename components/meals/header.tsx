@@ -15,8 +15,8 @@ const MealsHeader = () => {
   return (
     <View style={styles.dateButtonsContainer}>
       <Button title="Prev" onPress={prevDay} />
-      <Text style={styles.title}>{selectedDate}</Text>
-      {!isToday && <Button title="Next" onPress={nextDay} />}
+      <Text style={styles.title}>{isToday ? "Today" : selectedDate}</Text>
+      <Button title="Next" onPress={nextDay} />
     </View>
   );
 };
